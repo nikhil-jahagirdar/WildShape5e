@@ -1,13 +1,22 @@
 package com.example.wildshape5e.repository.dataobjects
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+
 data class MonsterDetail(
+
     val index : String,
+    @PrimaryKey
     val name : String,
     val size : String,
     val type : String,
     val alignment : String,
     val armor_class : Int,
     val hit_points : Int,
+    @Embedded
     val speed : Speed,
     val strength : Int,
     val dexterity : Int,
@@ -20,6 +29,7 @@ data class MonsterDetail(
     val damage_resistances : List<String>,
     val damage_immunities : List<String>,
     val condition_immunities : List<Condition>,
+    @Embedded
     val senses : Senses,
     val languages : String,
     val challenge_rating : Int,
