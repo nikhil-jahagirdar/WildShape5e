@@ -8,12 +8,14 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.wildshape5e.base.BaseAction
 import com.example.wildshape5e.base.DataResult
 import com.example.wildshape5e.base.MVIScreen
 import com.example.wildshape5e.beastlist.actions.FilterClickedAction
 import com.example.wildshape5e.beastlist.actions.InitBeastListAction
+import com.example.wildshape5e.repository.BeastDatabase
 import com.example.wildshape5e.repository.BeastRepository
 import com.example.wildshape5e.repository.BeastWebService
 import com.example.wildshape5e.ui.BeastCard
@@ -31,7 +33,8 @@ private val filterList = listOf(ChallengeRatingFilter, ChallengeRatingFilter, Ch
 fun BeastListScreen(navigator: DestinationsNavigator) {
     val viewModel = beastlistViewModel()
     val beastWebService = BeastWebService.getService()
-    val beastRepository = BeastRepository(beastWebService, Dispatchers.IO)
+    val infoDao = BeastDatabase.getDatabase(LocalContext.current).beastDao()
+    val beastRepository = BeastRepository(beastWebService, Dispatchers.IO, infoDao)
     MVIScreen(
         navigator = navigator,
         viewModel = viewModel,
