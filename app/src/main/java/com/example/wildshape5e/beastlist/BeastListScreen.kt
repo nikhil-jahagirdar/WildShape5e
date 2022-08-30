@@ -25,7 +25,7 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.Dispatchers
 
-private val filterList = listOf(ChallengeRatingFilter, ChallengeRatingFilter, ChallengeRatingFilter, ChallengeRatingFilter)
+private val filterList = listOf(ChallengeRatingFilter, StrengthFilter)
 
 @RootNavGraph(start = true)
 @Destination
@@ -38,8 +38,8 @@ fun BeastListScreen(navigator: DestinationsNavigator) {
     MVIScreen(
         navigator = navigator,
         viewModel = viewModel,
-
         InitBeastListAction(beastRepository)
+
     ) { BeastListScreenContent(it, viewModel.performAction) }
 }
 

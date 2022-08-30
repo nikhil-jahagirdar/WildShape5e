@@ -17,7 +17,7 @@ fun FilterCard(name : String, onClick : (() -> Unit)? = null) {
     Card(modifier = Modifier
         .fillMaxWidth()
         .clickable { onClick?.let { onClick() } },
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(4.dp),
         elevation = 4.dp
     ) {
         Box(modifier = Modifier.wrapContentSize()) {

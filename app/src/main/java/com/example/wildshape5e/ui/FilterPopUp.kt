@@ -19,9 +19,10 @@ fun FilterPopUp(name : String, content: @Composable (() -> Unit)) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .wrapContentHeight()
-        .background(color = Color.Gray)
+        .background(color = Color.LightGray)
     ) {
         Text(text = name)
         content()
+
     }
 }

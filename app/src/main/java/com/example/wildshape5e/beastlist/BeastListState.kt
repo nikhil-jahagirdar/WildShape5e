@@ -6,5 +6,6 @@ import com.example.wildshape5e.repository.dataobjects.MonsterDetail
 data class BeastListState(
     val beastListData : DataResult<List<MonsterDetail>> = DataResult.Loading,
     val filterClicked : Filter? = null,
-    val rating : Int? = null
+    val rating : Int? = 20,
+    val strength : Int? = null
 )
