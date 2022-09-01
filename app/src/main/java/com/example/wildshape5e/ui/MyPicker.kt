@@ -28,7 +28,7 @@ fun MyPicker(
     Column {
         PickerButton(
             size = width,
-            drawable = R.drawable.ic_launcher_foreground,
+            drawable = R.drawable.ic_baseline_add_24,
             enabled = !number.value.isEmpty() && number.value.toInt() < max,
             onClick = {
                 if (number.value.toInt() < max) {
@@ -59,7 +59,7 @@ fun MyPicker(
         )
         PickerButton(
             size = width,
-            drawable = R.drawable.ic_launcher_foreground,
+            drawable = R.drawable.ic_baseline_remove_24,
             enabled = !number.value.isEmpty() && number.value.toInt() > min,
             onClick = {
                 if (number.value.toInt() > min) {

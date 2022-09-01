@@ -2,12 +2,16 @@ package com.example.wildshape5e.beastlist
 
 import androidx.compose.runtime.Composable
 import com.example.wildshape5e.base.BaseAction
+import com.example.wildshape5e.beastlist.actions.FilterClickedAction
+import com.example.wildshape5e.beastlist.actions.FilterClosedAction
+import com.example.wildshape5e.beastlist.actions.RatingChosenAction
+import com.example.wildshape5e.beastlist.actions.RatingResetAction
 import com.example.wildshape5e.repository.dataobjects.MonsterDetail
 import com.example.wildshape5e.ui.FilterPopUp
 import com.example.wildshape5e.ui.MyPicker
 
 
-object ChallengeRatingFilter : Filter {
+object ChallengeRatingFilter : Filter() {
 
     const val title = "Challenge Rating"
 
@@ -16,7 +20,7 @@ object ChallengeRatingFilter : Filter {
     }
 
     override fun message(state: BeastListState) : String {
-        if (!isActive(state)) {
+        if (!isActive(state) || state.filterClicked is ChallengeRatingFilter) {
             return title
         } else {
             return "Rating: ${state.rating}"
@@ -32,11 +36,24 @@ object ChallengeRatingFilter : Filter {
 
     @Composable
     override fun popUp(state: BeastListState, performAction : (BaseAction<BeastListState>) -> Unit) {
-        FilterPopUp(name = title)  {
-            MyPicker(
-            )
+        FilterPopUp(
+            name = title,
+            {close(performAction)},
+            {
+                performAction(RatingResetAction())
+                performAction(FilterClosedAction())
+            }
+        )  {
+            MyPicker(default = state.rating?:0) {
+                performAction(RatingChosenAction(it))
+            }
 
         }
 
+    }
+
+    override fun reset(performAction: (BaseAction<BeastListState>) -> Unit) {
+        performAction(RatingResetAction())
+        close(performAction)
     }
 }

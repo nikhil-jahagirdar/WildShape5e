@@ -9,7 +9,7 @@ import com.example.wildshape5e.base.BaseAction
 import com.example.wildshape5e.repository.dataobjects.MonsterDetail
 import com.example.wildshape5e.ui.FilterPopUp
 
-object StrengthFilter : Filter {
+object StrengthFilter : Filter() {
     const val title = "Strength Rating"
 
     override fun isActive(state: BeastListState) : Boolean {
@@ -36,5 +36,9 @@ object StrengthFilter : Filter {
         FilterPopUp(name = title) {
             Spacer(modifier = Modifier.height(300.dp))
         }
+    }
+
+    override fun reset(performAction: (BaseAction<BeastListState>) -> Unit) {
+
     }
 }
