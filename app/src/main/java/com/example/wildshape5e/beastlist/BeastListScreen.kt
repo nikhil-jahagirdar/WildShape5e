@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -25,7 +26,6 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.Dispatchers
 
-private val filterList = listOf(ChallengeRatingFilter, ChallengeRatingFilter, ChallengeRatingFilter, ChallengeRatingFilter)
 
 @RootNavGraph(start = true)
 @Destination
@@ -38,8 +38,8 @@ fun BeastListScreen(navigator: DestinationsNavigator) {
     MVIScreen(
         navigator = navigator,
         viewModel = viewModel,
-
         InitBeastListAction(beastRepository)
+
     ) { BeastListScreenContent(it, viewModel.performAction) }
 }
 
@@ -65,7 +65,7 @@ fun BeastListScreenContent(
                         .fillMaxHeight()
                         .padding(16.dp)
                 ) {
-                    items(state.beastListData.data) { item ->
+                    items(state.filteredBeastList) { item ->
                         BeastCard(name = item.name)
                         Spacer(modifier = Modifier.height(16.dp))
                     }
@@ -79,7 +79,12 @@ fun BeastListScreenContent(
             Text(state.beastListData.errorMessage)
         }
         is DataResult.Loading -> {
-            CircularProgressIndicator()
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
         }
     }
 }

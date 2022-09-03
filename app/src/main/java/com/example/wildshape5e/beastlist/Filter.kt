@@ -2,16 +2,25 @@ package com.example.wildshape5e.beastlist
 
 import androidx.compose.runtime.Composable
 import com.example.wildshape5e.base.BaseAction
+import com.example.wildshape5e.beastlist.actions.FilterClosedAction
 import com.example.wildshape5e.repository.dataobjects.MonsterDetail
 
-interface Filter {
+val filterList = listOf(ChallengeRatingFilter, StrengthFilter)
 
-    fun isActive(state: BeastListState) : Boolean
+abstract class Filter {
 
-    fun message(state: BeastListState) : String
+    abstract fun isActive(state: BeastListState) : Boolean
 
-    fun filter(state: BeastListState, list : List<MonsterDetail>) : List<MonsterDetail>
+    abstract fun message(state: BeastListState) : String
+
+    abstract fun filter(state: BeastListState, list : List<MonsterDetail>) : List<MonsterDetail>
 
     @Composable
-    fun popUp(state: BeastListState, performAction: (BaseAction<BeastListState>) -> Unit)
+    abstract fun popUp(state: BeastListState, performAction: (BaseAction<BeastListState>) -> Unit)
+
+    fun close(performAction: (BaseAction<BeastListState>) -> Unit) {
+        performAction(FilterClosedAction())
+    }
+
+    abstract fun reset(performAction: (BaseAction<BeastListState>) -> Unit)
 }
