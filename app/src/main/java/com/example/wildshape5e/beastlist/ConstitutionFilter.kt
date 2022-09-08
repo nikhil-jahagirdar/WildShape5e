@@ -2,23 +2,24 @@ package com.example.wildshape5e.beastlist
 
 import androidx.compose.runtime.Composable
 import com.example.wildshape5e.base.BaseAction
-import com.example.wildshape5e.beastlist.actions.*
+import com.example.wildshape5e.beastlist.actions.ConstitutionChosenAction
+import com.example.wildshape5e.beastlist.actions.ConstitutionResetAction
 import com.example.wildshape5e.repository.dataobjects.MonsterDetail
 import com.example.wildshape5e.ui.FilterPopUp
 import com.example.wildshape5e.ui.MyPicker
 
-object StrengthFilter : Filter() {
-    const val title = "Strength"
+object ConstitutionFilter : Filter() {
+    const val title = "Constitution"
 
     override fun isActive(state: BeastListState) : Boolean {
-        return state.strength != null
+        return state.constitution != null
     }
 
     override fun message(state: BeastListState) : String {
         if (!isActive(state)) {
             return title
         } else {
-            return "Strength: ${state.strength}"
+            return "Constitution: ${state.constitution}"
         }
     }
 
@@ -26,25 +27,25 @@ object StrengthFilter : Filter() {
         if (!isActive(state)) {
             return list
         }
-        return list.filter { monsterDetail -> monsterDetail.strength == state.strength }
+        return list.filter { monsterDetail -> monsterDetail.constitution == state.constitution }
     }
 
     @Composable
     override fun popUp(state: BeastListState, performAction : (BaseAction<BeastListState>) -> Unit) {
         FilterPopUp(
-            name = StrengthFilter.title,
+            name = ConstitutionFilter.title,
             { close(performAction) },
             { reset(performAction) }
         )  {
-            MyPicker(default = state.strength?:0) {
-                performAction(StrengthChosenAction(it))
+            MyPicker(default = state.constitution?:0) {
+                performAction(ConstitutionChosenAction(it))
             }
 
         }
     }
 
     override fun reset(performAction: (BaseAction<BeastListState>) -> Unit) {
-        performAction(StrengthResetAction())
+        performAction(ConstitutionResetAction())
         close(performAction)
     }
 }

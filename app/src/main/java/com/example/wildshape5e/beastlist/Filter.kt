@@ -5,7 +5,7 @@ import com.example.wildshape5e.base.BaseAction
 import com.example.wildshape5e.beastlist.actions.FilterClosedAction
 import com.example.wildshape5e.repository.dataobjects.MonsterDetail
 
-val filterList = listOf(ChallengeRatingFilter, StrengthFilter)
+val filterList = listOf(ChallengeRatingFilter, StrengthFilter, DexterityFilter, ConstitutionFilter, IntelligenceFilter, WisdomFilter, CharismaFilter)
 
 abstract class Filter {
 

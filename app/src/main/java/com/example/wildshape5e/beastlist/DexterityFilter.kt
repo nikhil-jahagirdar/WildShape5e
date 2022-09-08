@@ -2,23 +2,26 @@ package com.example.wildshape5e.beastlist
 
 import androidx.compose.runtime.Composable
 import com.example.wildshape5e.base.BaseAction
-import com.example.wildshape5e.beastlist.actions.*
+import com.example.wildshape5e.beastlist.actions.DexterityChosenAction
+import com.example.wildshape5e.beastlist.actions.DexterityResetAction
+import com.example.wildshape5e.beastlist.actions.StrengthChosenAction
+import com.example.wildshape5e.beastlist.actions.StrengthResetAction
 import com.example.wildshape5e.repository.dataobjects.MonsterDetail
 import com.example.wildshape5e.ui.FilterPopUp
 import com.example.wildshape5e.ui.MyPicker
 
-object StrengthFilter : Filter() {
-    const val title = "Strength"
+object DexterityFilter : Filter() {
+    const val title = "Dexterity"
 
     override fun isActive(state: BeastListState) : Boolean {
-        return state.strength != null
+        return state.dexterity != null
     }
 
     override fun message(state: BeastListState) : String {
         if (!isActive(state)) {
             return title
         } else {
-            return "Strength: ${state.strength}"
+            return "Dexterity: ${state.dexterity}"
         }
     }
 
@@ -26,25 +29,25 @@ object StrengthFilter : Filter() {
         if (!isActive(state)) {
             return list
         }
-        return list.filter { monsterDetail -> monsterDetail.strength == state.strength }
+        return list.filter { monsterDetail -> monsterDetail.dexterity == state.dexterity }
     }
 
     @Composable
     override fun popUp(state: BeastListState, performAction : (BaseAction<BeastListState>) -> Unit) {
         FilterPopUp(
-            name = StrengthFilter.title,
+            name = DexterityFilter.title,
             { close(performAction) },
             { reset(performAction) }
         )  {
-            MyPicker(default = state.strength?:0) {
-                performAction(StrengthChosenAction(it))
+            MyPicker(default = state.dexterity?:0) {
+                performAction(DexterityChosenAction(it))
             }
 
         }
     }
 
     override fun reset(performAction: (BaseAction<BeastListState>) -> Unit) {
-        performAction(StrengthResetAction())
+        performAction(DexterityResetAction())
         close(performAction)
     }
 }

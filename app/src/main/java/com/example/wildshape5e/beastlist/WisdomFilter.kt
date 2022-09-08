@@ -2,23 +2,24 @@ package com.example.wildshape5e.beastlist
 
 import androidx.compose.runtime.Composable
 import com.example.wildshape5e.base.BaseAction
-import com.example.wildshape5e.beastlist.actions.*
+import com.example.wildshape5e.beastlist.actions.WisdomChosenAction
+import com.example.wildshape5e.beastlist.actions.WisdomResetAction
 import com.example.wildshape5e.repository.dataobjects.MonsterDetail
 import com.example.wildshape5e.ui.FilterPopUp
 import com.example.wildshape5e.ui.MyPicker
 
-object StrengthFilter : Filter() {
-    const val title = "Strength"
+object WisdomFilter : Filter() {
+    const val title = "Wisdom"
 
     override fun isActive(state: BeastListState) : Boolean {
-        return state.strength != null
+        return state.wisdom != null
     }
 
     override fun message(state: BeastListState) : String {
         if (!isActive(state)) {
             return title
         } else {
-            return "Strength: ${state.strength}"
+            return "Wisdom: ${state.wisdom}"
         }
     }
 
@@ -26,25 +27,25 @@ object StrengthFilter : Filter() {
         if (!isActive(state)) {
             return list
         }
-        return list.filter { monsterDetail -> monsterDetail.strength == state.strength }
+        return list.filter { monsterDetail -> monsterDetail.wisdom == state.wisdom }
     }
 
     @Composable
     override fun popUp(state: BeastListState, performAction : (BaseAction<BeastListState>) -> Unit) {
         FilterPopUp(
-            name = StrengthFilter.title,
+            name = WisdomFilter.title,
             { close(performAction) },
             { reset(performAction) }
         )  {
-            MyPicker(default = state.strength?:0) {
-                performAction(StrengthChosenAction(it))
+            MyPicker(default = state.wisdom?:0) {
+                performAction(WisdomChosenAction(it))
             }
 
         }
     }
 
     override fun reset(performAction: (BaseAction<BeastListState>) -> Unit) {
-        performAction(StrengthResetAction())
+        performAction(WisdomResetAction())
         close(performAction)
     }
 }
