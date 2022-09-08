@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.devtools.ksp' version '1.6.10-1.0.4'
     id 'kotlin-kapt'
+
+	// This must match the kotlin version
 }
 
 android {

@@ -39,12 +39,9 @@ object ChallengeRatingFilter : Filter() {
         FilterPopUp(
             name = title,
             {close(performAction)},
-            {
-                performAction(RatingResetAction())
-                performAction(FilterClosedAction())
-            }
+            {reset(performAction)}
         )  {
-            MyPicker(default = state.rating?:0) {
+            MyPicker(default = state.rating?:0, max = 8) {
                 performAction(RatingChosenAction(it))
             }
 
