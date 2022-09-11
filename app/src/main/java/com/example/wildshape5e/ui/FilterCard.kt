@@ -1,10 +1,7 @@
 package com.example.wildshape5e.ui
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -16,11 +13,15 @@ import androidx.compose.ui.unit.dp
 fun FilterCard(name : String, onClick : (() -> Unit)? = null) {
     Card(modifier = Modifier
         .fillMaxWidth()
-        .clickable { onClick?.let { onClick() } },
-        shape = RoundedCornerShape(4.dp),
+        .clickable { onClick?.let { onClick() } }
+        .padding(all = 2.dp),
+        shape = RoundedCornerShape(6.dp),
         elevation = 4.dp
     ) {
-        Box(modifier = Modifier.wrapContentSize()) {
+        Box(
+            modifier = Modifier.wrapContentSize()
+                .padding(all = 6.dp),
+        ) {
             Text(text = name)
 
         }
