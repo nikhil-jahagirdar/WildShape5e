@@ -1,14 +1,17 @@
 package com.example.wildshape5e.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.ButtonElevation
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun FilterPopUp(
@@ -27,6 +30,7 @@ fun FilterPopUp(
                 .weight(1f)
                 .fillMaxWidth(),
             onClick = { onDone() },
+            elevation = ButtonDefaults.elevation(defaultElevation = 0.dp),
             colors = ButtonDefaults.buttonColors(Color.Transparent)
         ) {}
         Column(
